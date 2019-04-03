@@ -40,7 +40,7 @@
                 items: [
                     {
                         icon: 'el-icon-lx-cascades',
-                        index: 'user',
+                        index: '/user',
                         title: '用户管理'
                     },
                     {
@@ -49,11 +49,11 @@
                         title: '校园资讯',
                         subs: [
                             {
-                                index: 'form',
+                                index: '/news/list',
                                 title: '资讯列表'
                             },
                             {
-                                index: '3-2',
+                                index: '/news/create',
                                 title: '发表资讯',
                             },
                         ]

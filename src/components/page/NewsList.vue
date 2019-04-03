@@ -3,20 +3,11 @@
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item>
-          <i class="el-icon-lx-cascades"></i> 基础表格
+          <i class="el-icon-lx-cascades"></i> 新闻列表
         </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="container">
-      <div class="handle-box">
-        <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
-        <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
-          <el-option key="1" label="广东省" value="广东省"></el-option>
-          <el-option key="2" label="湖南省" value="湖南省"></el-option>
-        </el-select>
-        <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-        <el-button type="primary" icon="search" @click="search">搜索</el-button>
-      </div>
       <el-table
         :data="tableData"
         border
@@ -24,26 +15,12 @@
         ref="multipleTable"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" align="center"></el-table-column>
-        <el-table-column prop="account" label="账号" sortable width="150"></el-table-column>
-        <el-table-column prop="nickname" label="昵称" width="120"></el-table-column>
-        <el-table-column prop="sex" label="性别" width="120">
+        <el-table-column prop="origin" label="来源" width="150"></el-table-column>
+        <el-table-column prop="title" label="标题" width="120"></el-table-column>
+        <el-table-column prop="read_num" label="阅读数" width="120"></el-table-column>
+        <el-table-column prop="update_time" label="更新时间">
             <template slot-scope="scope">
-                <span v-if="scope.row.sex === 'male'">男</span>
-                <span v-else-if="scope.row.sex === 'female'">女</span>
-                <span v-else-if="scope.row.sex === 'secret'">保密</span>
-                <span v-else>暂未设置</span>
-            </template>
-        </el-table-column>
-        <el-table-column prop="major" label="专业" width="120"></el-table-column>
-        <el-table-column prop="register_time" label="注册时间">
-            <template slot-scope="scope">
-                {{convertUTCTimeToLocalTime(scope.row.register_time)}}
-            </template>
-        </el-table-column>
-        <el-table-column prop="login_time" label="登陆时间">
-            <template slot-scope="scope">
-                {{convertUTCTimeToLocalTime(scope.row.login_time)}}
+                {{convertUTCTimeToLocalTime(scope.row.update_time)}}
             </template>
         </el-table-column>
         <el-table-column label="操作" width="180" align="center">
@@ -52,7 +29,7 @@
               type="text"
               icon="el-icon-edit"
               @click="reset(scope.row.uid)"
-            >重置密码</el-button>
+            >修改</el-button>
             <el-button
               type="text"
               icon="el-icon-delete"
@@ -144,7 +121,7 @@ export default {
     // 获取 easy-mock 的模拟数据
     getData(keyword) {
       // 开发环境使用 easy-mock 数据，正式环境使用 json 文件
-      this.url = "/api/user/search_user";
+      this.url = "/api/news/news";
       this.$axios
         .get(this.url, {
             params: {
@@ -155,7 +132,7 @@ export default {
         })
         .then(({ data }) => {
           this.total = data.total;
-          this.tableData = data.users;
+          this.tableData = data.news;
         });
     },
     search() {
@@ -188,11 +165,11 @@ export default {
       // this.delVisible = true;
       let arr = [];
       arr.push(uid);
-      let url = "/api/user/user";
+      let url = "/api/news/news";
       this.$axios
         .delete(url, {
           data: {
-            user_uids: arr
+            news_ids: arr
           }
         })
         .then(({ data }) => {

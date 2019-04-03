@@ -27,53 +27,17 @@ export default new Router({
                 {
                     path: '/user',
                     component: resolve => require(['../components/page/User.vue'], resolve),
-                    meta: { title: '基础表格' }
+                    meta: { title: '用户列表' }
                 },
                 {
-                    path: '/tabs',
-                    component: resolve => require(['../components/page/Tabs.vue'], resolve),
-                    meta: { title: 'tab选项卡' }
+                    path: '/news/list',
+                    component: resolve => require(['../components/page/NewsList.vue'], resolve),
+                    meta: { title: '文章列表' }
                 },
                 {
-                    path: '/form',
-                    component: resolve => require(['../components/page/BaseForm.vue'], resolve),
-                    meta: { title: '基本表单' }
-                },
-                {
-                    // 富文本编辑器组件
-                    path: '/editor',
-                    component: resolve => require(['../components/page/VueEditor.vue'], resolve),
-                    meta: { title: '富文本编辑器' }
-                },
-                {
-                    // markdown组件
-                    path: '/markdown',
-                    component: resolve => require(['../components/page/Markdown.vue'], resolve),
-                    meta: { title: 'markdown编辑器' }    
-                },
-                {
-                    // 图片上传组件
-                    path: '/upload',
-                    component: resolve => require(['../components/page/Upload.vue'], resolve),
-                    meta: { title: '文件上传' }   
-                },
-                {
-                    // vue-schart组件
-                    path: '/charts',
-                    component: resolve => require(['../components/page/BaseCharts.vue'], resolve),
-                    meta: { title: 'schart图表' }
-                },
-                {
-                    // 拖拽列表组件
-                    path: '/drag',
-                    component: resolve => require(['../components/page/DragList.vue'], resolve),
-                    meta: { title: '拖拽列表' }
-                },
-                {
-                    // 拖拽Dialog组件
-                    path: '/dialog',
-                    component: resolve => require(['../components/page/DragDialog.vue'], resolve),
-                    meta: { title: '拖拽弹框' }
+                    path: '/news/create',
+                    component: resolve => require(['../components/page/WriteArticle.vue'], resolve),
+                    meta: { title: '发表文章' }
                 },
                 {
                     // 权限页面

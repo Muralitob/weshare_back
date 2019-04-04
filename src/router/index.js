@@ -31,6 +31,7 @@ export default new Router({
                 },
                 {
                     path: '/news/list',
+                    name: 'articlelist',
                     component: resolve => require(['../components/page/NewsList.vue'], resolve),
                     meta: { title: '文章列表' }
                 },
@@ -38,6 +39,12 @@ export default new Router({
                     path: '/news/create',
                     component: resolve => require(['../components/page/WriteArticle.vue'], resolve),
                     meta: { title: '发表文章' }
+                },
+                {
+                    path: '/news/edit/:article_id',
+                    name: 'editarticle',
+                    component: resolve => require(['../components/page/EditArticle.vue'], resolve),
+                    meta: { title: '编辑文章' }
                 },
                 {
                     // 权限页面

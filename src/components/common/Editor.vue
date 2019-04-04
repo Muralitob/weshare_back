@@ -2,7 +2,7 @@
     <div>
         <!-- 图片上传组件辅助-->
         <!-- iview -->
-      <Upload
+      <!-- <el-upload
         class="avatar-uploader"
         :action="serverUrl"
         :max-size="2048"
@@ -13,7 +13,7 @@
         :on-success="uploadSuccess"
         :on-error="uploadError"
         :before-upload="beforeUpload">
-      </Upload>
+      </el-upload> -->
       <quill-editor 
       class="editor"
       v-model="content"

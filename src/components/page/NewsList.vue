@@ -16,7 +16,11 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column prop="origin" label="来源" width="150"></el-table-column>
-        <el-table-column prop="title" label="标题" width="120"></el-table-column>
+        <el-table-column prop="title" label="标题" >
+          <template slot-scope="scope">
+            {{scope.row.article['title']}}
+          </template>
+        </el-table-column>
         <el-table-column prop="read_num" label="阅读数" width="120"></el-table-column>
         <el-table-column prop="update_time" label="更新时间">
             <template slot-scope="scope">
@@ -28,13 +32,13 @@
             <el-button
               type="text"
               icon="el-icon-edit"
-              @click="reset(scope.row.uid)"
+              @click="reset(scope.row._id)"
             >修改</el-button>
             <el-button
               type="text"
               icon="el-icon-delete"
               class="red"
-              @click="handleDelete(scope.row.uid)"
+              @click="handleDelete(scope.row._id)"
             >删除</el-button>
           </template>
         </el-table-column>
@@ -145,38 +149,22 @@ export default {
     filterTag(value, row) {
       return row.tag === value;
     },
-    reset(uid) {
-      this.url = "/api/user/reset_password_from_admin";
-      let uids = []
-      uids.push(uid)
-      this.$axios
-        .post(this.url, {
-            uids
-        })
-        .then(({ data }) => {
-            if(data.code == 217) {
-                this.$message.success("重置成功");
-            }
-          console.log(data);
-        });
+    reset(article_id) {
+      this.$router.push({name: 'editarticle', params: { article_id}})
     },
-    handleDelete(uid) {
-      // this.idx = index;
-      // this.delVisible = true;
+    handleDelete(id) {
       let arr = [];
-      arr.push(uid);
+      arr.push(id);
       let url = "/api/news/news";
       this.$axios
         .delete(url, {
           data: {
-            news_ids: arr
+            ids: arr
           }
         })
         .then(({ data }) => {
-          if (data.code == 219) {
             this.getData();
             this.$message.success("删除成功");
-          }
         });
     },
     delAll() {

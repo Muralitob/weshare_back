@@ -1,8 +1,8 @@
 <template>
   <div id="text-contribute">
-      <Tabs :value="activeTab" animated @on-click="getDrafts">
-        <TabPane name="edit" label="文章投稿">
-          <Input v-model="article.title" size="large" placeholder="请输入标题" />
+      <el-tabs v-model="activeTab" @tab-click="getDrafts">
+        <el-tab-pane name="edit" label="文章投稿">
+          <el-input v-model="article.title" size="large" placeholder="请输入标题" />
           <Editor v-model="article.content" @summary="returnSummary" ></Editor>
           <div class="block-wrap">
             <h3 class="block-title">
@@ -19,8 +19,8 @@
             <Button class="handleArticle" type="success" @click="handleArticle('real')">提交文章</Button>
             <Button class="handleArticle" type="warning" @click="handleArticle('fake')">存入草稿</Button>
           </div>
-        </TabPane>
-        <TabPane label="草稿箱" name="drafts">
+        </el-tab-pane>
+        <el-tab-pane label="草稿箱" name="drafts">
           <div class="draft-card" v-for="item in draftsList" :key="item._id">
             <div class="meta-wrap">
               <div class="meta-title"><h3>{{item.article.title}}</h3></div>
@@ -34,9 +34,9 @@
               </div>
             </div>
           </div>
-          <Page prev-text="上一页" next-text="下一页" @on-change="changepage" :total="total" show-elevator class-name="draft-pageBox"></Page>
-        </TabPane>
-    </Tabs>
+          <!-- <Page prev-text="上一页" next-text="下一页" @on-change="changepage" :total="total" show-elevator class-name="draft-pageBox"></Page> -->
+        </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
@@ -55,7 +55,7 @@ export default {
         title: ""
       }, //文章
       draftsList: [],
-      activeTab: "",
+      activeTab: "edit",
       tagLists: [], //标签
       inputTag: "",
       total: 0
@@ -82,24 +82,23 @@ export default {
       this.tagLists.splice(index, 1);
     },
     handleArticle(category) {
-      api
-        .handleArticle({
-          article: this.article,
-          tagLists: this.tagLists,
-          category
-        })
-        .then(({ data }) => {
-          // this.$Message.success(general.translate(data.code));
-        })
-        .catch(err => {
-          // this.$Message.error(general.translate(err.code));
-        });
+      let url = '/api/news/news'
+      this.$axios.post(url, {
+        article: this.article,
+        tagLists: this.tagLists,
+        category
+      }).then(({data}) => {
+        console.log('hahha')
+      }).catch((err) => {
+        
+      });
     },
     changepage(index) {
       this.getDrafts("drafts", index);
     },
-    getDrafts(name) {
-      this.activeTab = name
+    getDrafts(obj) {
+      // console.log(name)
+      this.activeTab = obj.name
       if (name === "drafts") {
         api
           .getArticles("fake", 1)

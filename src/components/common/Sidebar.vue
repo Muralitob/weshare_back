@@ -60,7 +60,7 @@
                     },
                     {
                         icon: 'el-icon-lx-emoji',
-                        index: 'icon',
+                        index: '/goods',
                         title: '二手货物管理'
                     },
                 ]

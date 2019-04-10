@@ -7,7 +7,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/dashboard'
+            redirect: '/user'
         },
         {
             path: '/',
@@ -18,11 +18,6 @@ export default new Router({
                     path: '/dashboard',
                     component: resolve => require(['../components/page/Dashboard.vue'], resolve),
                     meta: { title: '系统首页' }
-                },
-                {
-                    path: '/icon',
-                    component: resolve => require(['../components/page/Icon.vue'], resolve),
-                    meta: { title: '自定义图标' }
                 },
                 {
                     path: '/user',
@@ -45,6 +40,12 @@ export default new Router({
                     name: 'editarticle',
                     component: resolve => require(['../components/page/EditArticle.vue'], resolve),
                     meta: { title: '编辑文章' }
+                },
+                {
+                    path: '/goods',
+                    name: 'goodlist',
+                    component: resolve => require(['../components/page/Goods.vue'], resolve),
+                    meta: { title: '货物管理' }
                 },
                 {
                     // 权限页面

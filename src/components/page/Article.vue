@@ -46,7 +46,7 @@
               type="text"
               icon="el-icon-delete"
               class="red"
-              @click="handleDelete(scope.row.uid)"
+              @click="handleDelete(scope.row._id)"
             >删除</el-button>
           </template>
         </el-table-column>
@@ -177,15 +177,13 @@ export default {
       // this.delVisible = true;
       let arr = [];
       arr.push(uid);
-      let url = "/api/goods/send_goods";
+      let url = "/api/article/delete_article_by_ids";
       this.$axios
         .delete(url, {
-          data: {
-            goods_list: arr
-          }
+          data: arr
         })
         .then(({ data }) => {
-          if (data.code == 219) {
+          if (data.code == 108) {
             this.getData();
             this.$message.success("删除成功");
           }

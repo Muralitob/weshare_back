@@ -63,6 +63,11 @@
                         index: '/goods',
                         title: '二手货物管理'
                     },
+                    {
+                        icon: 'el-icon-lx-emoji',
+                        index: '/article',
+                        title: '文章管理'
+                    },
                 ]
             }
         },

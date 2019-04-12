@@ -25,21 +25,26 @@ export default new Router({
                     meta: { title: '用户列表' }
                 },
                 {
+                    path: '/article',
+                    component: resolve => require(['../components/page/Article.vue'], resolve),
+                    meta: { title: '文章管理' }
+                },
+                {
                     path: '/news/list',
                     name: 'articlelist',
                     component: resolve => require(['../components/page/NewsList.vue'], resolve),
-                    meta: { title: '文章列表' }
+                    meta: { title: '新闻资讯列表' }
                 },
                 {
                     path: '/news/create',
                     component: resolve => require(['../components/page/WriteArticle.vue'], resolve),
-                    meta: { title: '发表文章' }
+                    meta: { title: '新闻资讯创建' }
                 },
                 {
                     path: '/news/edit/:article_id',
                     name: 'editarticle',
                     component: resolve => require(['../components/page/EditArticle.vue'], resolve),
-                    meta: { title: '编辑文章' }
+                    meta: { title: '编辑资讯' }
                 },
                 {
                     path: '/goods',
